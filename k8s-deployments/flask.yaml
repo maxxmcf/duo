@@ -36,6 +36,6 @@ spec:
         image: stratcastor/duo-deploy-flask:latest
         ports:
         - containerPort: 5500
-      env:
-      - name: YOUR_NAME
-        value: Piers
+        env:
+        - name: YOUR_NAME
+          value: Piers
