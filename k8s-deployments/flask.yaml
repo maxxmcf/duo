@@ -18,7 +18,7 @@ metadata:
   labels:
     app: flask
 spec:
-  replicas: 5
+  replicas: 10
   selector:
     matchLabels:
       app: flask
@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: flask-container
-        image: stratcastor/duo-deploy-flask:v1
+        image: stratcastor/duo-deploy-flask:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5500
