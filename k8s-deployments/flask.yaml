@@ -5,7 +5,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: flask
+    app: flask-app
   ports:
   - protocol: TCP
     port: 5500
@@ -16,12 +16,12 @@ kind: Deployment
 metadata:
   name: flask-deployment
   labels:
-    app: flask
+    app: flask-app
 spec:
   replicas: 10
   selector:
     matchLabels:
-      app: flask
+      app: flask-app
   strategy:
     rollingUpdate:
       maxSurge: 20%
@@ -29,7 +29,7 @@ spec:
   template:
     metadata:
       labels:
-        app: flask
+        app: flask-app
     spec:
       containers:
       - name: flask-container
