@@ -1,32 +1,44 @@
 pipeline {
     agent any
     stages {
-        stage('welcome') {
+        stage('welcome jenky') {
             steps {
                 sh '''
                 echo "hi there - welcome to the pipeline"
                 '''
             }
         }
-        stage('build docker images') {
+        stage('buildy dockery images') {
             steps {
                 sh '''
-                docker build -t maxmcf13/appkub:latest .
-                docker build -t maxmcf13/nginxkub:latest ./nginx
+                docker build -t maxmcf13/appkub:latest -t maxmcf13/appkub:v$BUILD_NUMBER .
                 '''
             }
         }
-        stage('push docker images') {
+        stage('pushy dockery images') {
             steps {
                 sh '''
                 docker push maxmcf13/appkub:latest
-                docker push maxmcf13/nginxkub:latest
+                docker push maxmcf13/appkub:v$BUILD_NUMBER
                 '''
             }
         }
         stage('rolling rolling restart') {
             steps {
-                sh 'kubectl rollout restart deployment flask-deployment'
+                sh '''
+                    kubectl apply -f ./k8s-deployments -n prod
+                    kubectl rollout restart deployment flask-deployment --n prod
+                '''
+            }
+        }
+        stage('tidy space tidy mind') {
+            steps {
+                sh '''
+                docker rmi maxmcf13/appkub:latest
+                docker rmi maxmcf13/appkub:v$BUILD_NUMBER
+
+                docker system prune -a --force
+                '''
             }
         }
     }
