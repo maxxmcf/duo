@@ -11,7 +11,8 @@ pipeline {
         stage('build docker images') {
             steps {
                 sh '''
-                docker build -t maxmcf13/appkub:latest ./nginx
+                docker build -t maxmcf13/appkub:latest ./flask-app
+                docker build -t maxmcf13/nginxkub:latest ./nginx
                 '''
             }
         }
@@ -19,6 +20,7 @@ pipeline {
             steps {
                 sh '''
                 docker push maxmcf13/appkub:latest
+                docker push maxmcf13/nginxkub:latest
                 '''
             }
         }
