@@ -24,10 +24,5 @@ pipeline {
                 '''
             }
         }
-        stage('rolling rolling restart') {
-            steps {
-                //
-            }
-        }
     }
 }
