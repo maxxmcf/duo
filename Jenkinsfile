@@ -24,5 +24,10 @@ pipeline {
                 '''
             }
         }
+        stage('rolling rolling restart') {
+            steps {
+                sh 'kubectl rollout restart deployment flask-deployment'
+            }
+        }
     }
 }
