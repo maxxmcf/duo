@@ -26,7 +26,6 @@ pipeline {
         stage('rolling rolling restart') {
             steps {
                 sh '''
-                kubectl apply -f ./k8s-deployments -n prod
                 kubectl rollout restart deployment flask-deployment -n production
                 '''
             }
